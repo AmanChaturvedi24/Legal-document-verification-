@@ -1,0 +1,16 @@
+.typing-header {
+    overflow: hidden; /* Hide overflow to create typing effect */
+    white-space: nowrap; /* Prevent line breaks */
+    letter-spacing: 4px; /* Adjust letter spacing for better readability */
+    animation: typing 3s steps(50, end) 1; /* Animation for typing effect */
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0; /* Start with no width */
+    }
+    to {
+      width: 100%; /* Increase width to show full text */
+    }
+  }
+  
