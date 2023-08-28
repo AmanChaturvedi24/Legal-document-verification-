@@ -78,21 +78,24 @@ const Body = () => {
           {/* Add preview content here */}
           {selectedFile && (
           <div className="document-preview">
-            {selectedFile.type.includes("image") ? (
-              <img
-              src={URL.createObjectURL(selectedFile)}
-              alt="Preview"
-              style={{ width: "100%", height: "300px" }}
-            />
-    
-            ) : (
-              <iframe
-                title="Document Preview"
-                src={`https://docs.google.com/gview?url=${URL.createObjectURL(selectedFile)}&embedded=true`}
-                width="100%"
-                height="500px"
-              ></iframe>
-            )}
+             {selectedFile && (
+      <>
+        {selectedFile.type.includes("image") ? (
+          <img
+            src={URL.createObjectURL(selectedFile)}
+            alt="Preview"
+            style={{ width: "100%", height: "300px" }}
+          />
+        ) : (
+          <iframe
+            title="Document Preview"
+            src={URL.createObjectURL(selectedFile)}
+            width="100%"
+            height="500px"
+          ></iframe>
+        )}
+      </>
+    )}
           </div>
         )}
           <button className="verify-button">Verify Document</button>

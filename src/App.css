@@ -5,7 +5,6 @@ body {
   padding: 0;
   font-family: Inter, sans-serif;
   background: #000;
-  padding: 1rem 10rem;
   overflow: hidden;
 }
 
@@ -14,28 +13,32 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  min-width: 100vw;
+  overflow-y: auto;
 }
 
 header {
   color: #FFF;
-  font-size: 1.65rem;
+  font-size: 1.875rem;
   font-style: normal;
-  font-weight: 250;
-  line-height:normal;
-  margin-top: 0.5rem;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 1rem;
+  padding: 1rem 0;
 }
 
 .content-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.75rem;
+  margin-top: 1.5rem;
   padding: 0.5rem;
+  overflow: hidden;
 }
 
 .left-section {
   flex: 1;
   min-width: 16.5rem;
-  min-height: 22rem; /* Adjust the height as needed */
+  min-height: 22.625rem;
   border-radius: 0.75rem;
   background: rgba(33, 37, 37, 0.58);
   padding: 1rem;
@@ -43,7 +46,9 @@ header {
   flex-direction: column;
   align-items: center;
   margin-right: 1rem;
+  overflow-y: auto;
 }
+
 .input-label {
   width: 100%;
   max-width: 12.5rem;
@@ -57,16 +62,19 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
 }
-.selected-file{
+
+.selected-file {
   margin: auto;
   color: #FFF;
-
-  
+  margin-top: 1rem;
 }
+
 .input-file {
   display: none;
 }
+
 .upload-button {
   width: 100%;
   max-width: 12.5rem;
@@ -82,25 +90,55 @@ header {
 .right-section {
   flex: 2;
   min-width: 32.625rem;
-  min-height: 22rem; /* Adjust the height as needed */
+  min-height: 22.625rem;
   border-radius: 0.75rem;
   background: rgba(136, 55, 137, 0.44);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
 }
 
+.document-preview {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  
+}
+.document-preview img,
+.document-preview iframe {
+  width: 100%;
+  max-height: 100%;
+}
 .verify-button {
   width: 100%;
   max-width: 15.5625rem;
   height: 2.3125rem;
   border-radius: 2.5rem;
   border: 1px solid #000;
-  background: #552C96;
+  background: #5214D6;
   color: #FFF;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
   margin-top: auto;
   border: none;
   cursor: pointer;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+  .left-section {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
 }
