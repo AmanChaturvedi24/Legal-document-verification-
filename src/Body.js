@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-
+import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
+import './Body.css';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoLbzCMkfVx3ZVK-oAEyiPPM8LZFdJiSM",
@@ -20,6 +20,21 @@ const analytics = getAnalytics(app);
 
 const Body = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showNotification, setShowNotification] = useState(false); 
+  const [previewUrl, setPreviewUrl] = useState(null); // To store the preview URL
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [uniqueKey, setUniqueKey] = useState(Date.now()); // Unique key for fetching images
+
+  useEffect(() => {
+    // When selectedFile or uniqueKey changes, update the preview URL
+    if (selectedFile) {
+      setPreviewUrl(null); // Clear the previous preview
+
+      // Generate a unique key to force re-fetching the image
+      setUniqueKey(Date.now());
+    }
+  }, [selectedFile, uniqueKey]);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -35,18 +50,35 @@ const Body = () => {
 
 
       try {
-        await uploadBytes(storageRef, selectedFile).then((snapshot) => {
-          console.log('Uploaded a blob or file!');
-          alert("file uploaded");
-        });
+        setUploading(true);
+
+        await uploadBytes(storageRef, selectedFile);
+        const downloadURL = await getDownloadURL(storageRef);
+        setPreviewUrl(downloadURL);
+
+          // console.log('Uploaded a blob or file!');
+          // alert("file uploaded");
+          setNotificationMessage('File uploaded successfully!');
+          setShowNotification(true);
+          setTimeout(() => {
+            setShowNotification(false);
+          }, 3000);
+          setUploading(false);
+
 
  
 
         setSelectedFile(null);
       } catch (error) {
         console.error('Error uploading file:', error);
-      }
-      
+        setNotificationMessage(`Error: ${error.message}`);
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 3000);
+        setUploading(false);
+
+      }      
     }
     else {
       console.log("else mai hun ")
@@ -70,34 +102,62 @@ const Body = () => {
             />
           </label>
           <p className="selected-file">{selectedFile ? `Selected file: ${selectedFile.name}` : 'No file chosen'}</p>
-          <button className="upload-button" onClick={handleFileUpload}>
-            Upload
+          <button className={`upload-button ${uploading ? 'uploading' : ''}`} onClick={handleFileUpload}>
+            {uploading ? 'Uploading..' : 'Upload'}
           </button>
+          {showNotification && (
+        <div className="notification">
+              <p>{notificationMessage}</p>
+        </div>
+      )}
         </div>
         <div className="right-section">
-          {/* Add preview content here */}
-          {selectedFile && (
-          <div className="document-preview">
-             {selectedFile && (
-      <>
-        {selectedFile.type.includes("image") ? (
-          <img
-            src={URL.createObjectURL(selectedFile)}
-            alt="Preview"
-            style={{ width: "100%", height: "300px" }}
-          />
-        ) : (
-          <iframe
-            title="Document Preview"
-            src={URL.createObjectURL(selectedFile)}
-            width="100%"
-            height="500px"
-          ></iframe>
-        )}
-      </>
-    )}
-          </div>
-        )}
+        {previewUrl === null && (
+            <p>Preview Of Uploaded File</p>
+          )}
+          {uploading ? (
+            <div className="document-preview">
+              <div className="loader">
+                <div className="loader-inner">
+                  <div className="loader-line-wrap">
+                    <div className="loader-line"></div>
+                  </div>
+                  <div className="loader-line-wrap">
+                    <div className="loader-line"></div>
+                  </div>
+                  <div className="loader-line-wrap">
+                    <div className="loader-line"></div>
+                  </div>
+                  <div className="loader-line-wrap">
+                    <div className="loader-line"></div>
+                  </div>
+                  <div className="loader-line-wrap">
+                    <div className="loader-line"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Display the uploaded file preview
+            previewUrl && (
+              <div className="document-preview">
+                {selectedFile && (selectedFile.type.includes('image') || selectedFile.name.match(/\.(jpg|jpeg|png)$/i)) ? (
+                  <img
+                  src={`${previewUrl}?${uniqueKey}`} // Append the uniqueKey to force re-fetching
+                    alt="Preview"
+                    style={{ width: "100%", height: "300px" }}
+                  />
+                ) : (
+                  <iframe
+                    title="Document Preview"
+                    src={previewUrl}
+                    width="100%"
+                    height="500px"
+                  ></iframe>
+                )}
+              </div>
+            )
+          )}
           <button className="verify-button">Verify Document</button>
         </div>
       </div>

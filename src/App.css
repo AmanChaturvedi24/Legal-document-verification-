@@ -59,7 +59,7 @@ header {
   margin-right: 1rem;
   overflow: hidden;
   box-shadow: inset 5px 5px 8px rgba(136, 55, 137, 0.5),
-  inset -1px -1px 5px rgb(230, 230, 230) ;
+  inset -1px -1px 5px rgba(231, 188, 232, 0.77) ;
 }
 
 .input-label {
@@ -69,8 +69,8 @@ header {
   border-radius: 1.25rem;
   background: #552C96;
   color: #FFF;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-
+  box-shadow: inset 2px 1px 5px rgb(32, 6, 45),
+  inset -1px -4px 6px rgb(46, 2, 65) ;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -96,8 +96,8 @@ header {
   height: 2.4375rem;
   border-radius: 1.25rem;
   background: #552C96;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-
+  box-shadow: inset 2px 1px 5px rgb(32, 6, 45),
+  inset -1px -4px 6px rgb(46, 2, 65) ;
   margin-top: auto;
   color: #FFF;
   border: none;
@@ -118,12 +118,17 @@ header {
   scrollbar-width: none; 
   overflow-y: scroll; 
   position: sticky;
-  box-shadow: inset 5px 10px 10px rgba(0, 0, 0, 0.5),
-  inset -10px -1px 5px rgb(5, 5, 5) ;
+  box-shadow: inset 4px 2px 9px rgb(20, 10, 21),
+  inset -1px -1px 5px rgb(0, 0, 0) ;
   top: 0;
 }
 .right-section::-webkit-scrollbar{
   display: none;
+}
+.right-section p
+{
+  color: white;
+  margin: auto;
 }
 .document-preview {
   width: 100%;
@@ -147,9 +152,10 @@ header {
   height: 2.3125rem;
   border-radius: 2.5rem;
   border: 1px solid #000;
-  background: #5214D6;
+  background: #552C96;
   color: #FFF;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow:  -2px 4px 15px rgb(20, 10, 21),
+  inset -1px -1px 6px rgb(22, 3, 91) ;
   margin-top: auto;
   border: none;
   cursor: pointer;
