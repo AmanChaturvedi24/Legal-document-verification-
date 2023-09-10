@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
 import './Body.css';
+import {useNavigate} from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoLbzCMkfVx3ZVK-oAEyiPPM8LZFdJiSM",
@@ -19,6 +20,7 @@ const analytics = getAnalytics(app);
 
 
 const Body = () => {
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const [showNotification, setShowNotification] = useState(false); 
   const [previewUrl, setPreviewUrl] = useState(null); // To store the preview URL
@@ -39,6 +41,9 @@ const Body = () => {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+  const handleClick = (event) => {
+    navigate('/summary');
+  };
 
   const handleFileUpload = async () => {
     if (selectedFile) {
@@ -47,8 +52,7 @@ const Body = () => {
       const metadata = {
         contentType: 'image/pdf',
       };
-
-
+     
       try {
         setUploading(true);
 
@@ -84,6 +88,9 @@ const Body = () => {
       console.log("else mai hun ")
       alert("choose something first")
     }
+
+    
+
   };
 
   return (
@@ -143,7 +150,7 @@ const Body = () => {
               <div className="document-preview">
                 {selectedFile && (selectedFile.type.includes('image') || selectedFile.name.match(/\.(jpg|jpeg|png)$/i)) ? (
                   <img
-                  src={`${previewUrl}?${uniqueKey}`} // Append the uniqueKey to force re-fetching
+                  src={`${previewUrl}?${uniqueKey}`} 
                     alt="Preview"
                     style={{ width: "100%", height: "300px" }}
                   />
@@ -158,7 +165,10 @@ const Body = () => {
               </div>
             )
           )}
-          <button className="verify-button">Verify Document</button>
+          <button
+          onClick={handleClick}
+  className="verify-button" 
+>Verify Document</button>
         </div>
       </div>
     </div>
