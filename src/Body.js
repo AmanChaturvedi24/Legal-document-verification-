@@ -42,7 +42,16 @@ const Body = () => {
     setSelectedFile(event.target.files[0]);
   };
   const handleClick = (event) => {
-    navigate('/summary');
+    if (previewUrl) {
+      navigate('/summary');
+    } else {
+      setNotificationMessage('Please choose a file to upload.');
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
+    }
+
   };
 
   const handleFileUpload = async () => {
