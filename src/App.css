@@ -103,6 +103,28 @@ header {
   border: none;
   cursor: pointer;
 }
+.summary-container {
+  flex: 2;
+  z-index: 1;
+  min-width: 32.625rem;
+  min-height: 22.625rem;
+  border-radius: 0.75rem;
+  color:#f1bcd1;
+  background: rgba(71, 40, 71, 0.865);
+  padding: 1rem;
+  margin: 2rem 4rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* -ms-overflow-style: none;  */
+  /* scrollbar-width: none;  */
+  overflow :hidden;
+  /* overflow-y: scroll;  */
+  position: sticky;
+  box-shadow: inset 4px 2px 9px rgb(44, 3, 49),
+  inset -1px -1px 5px rgb(24, 1, 24) ;
+  top: 0;
+}
 
 .right-section {
   flex: 2;

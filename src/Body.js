@@ -27,6 +27,7 @@ const Body = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uniqueKey, setUniqueKey] = useState(Date.now()); // Unique key for fetching images
+  const [tempSelectedFile, setTempSelectedFile] = useState(null); // Temporary storage for the selected file
 
   useEffect(() => {
     // When selectedFile or uniqueKey changes, update the preview URL
@@ -43,7 +44,8 @@ const Body = () => {
   };
   const handleClick = (event) => {
     if (previewUrl) {
-      navigate('/summary');
+      console.log(tempSelectedFile)
+      navigate('/summary', { state: { fileData: tempSelectedFile } });
     } else {
       setNotificationMessage('Please choose a file to upload.');
       setShowNotification(true);
@@ -68,6 +70,7 @@ const Body = () => {
         await uploadBytes(storageRef, selectedFile);
         const downloadURL = await getDownloadURL(storageRef);
         setPreviewUrl(downloadURL);
+        setTempSelectedFile(selectedFile);
 
           // console.log('Uploaded a blob or file!');
           // alert("file uploaded");
