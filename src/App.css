@@ -125,7 +125,22 @@ header {
   inset -1px -1px 5px rgb(24, 1, 24) ;
   top: 0;
 }
+.contentStyle 
+{
+  max-width:100vw;
+  /* word-wrap: break-word; */
+    
+  /*  // Adjust the width as needed */
+  /* // overflow: 'auto',  // Enable scrolling for large content
+  border: '1px solid #ccc',
+  padding: '10px', */
 
+
+}
+.contentStyle pre{
+  word-wrap: break-word;
+  max-width: 50%;
+}
 .right-section {
   flex: 2;
   min-width: 32.625rem;

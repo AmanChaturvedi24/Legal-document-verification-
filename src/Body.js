@@ -4,10 +4,12 @@ import { getAnalytics } from "firebase/analytics";
 import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
 import './Body.css';
 import {useNavigate} from 'react-router-dom';
+import { getDatabase, ref as dbre ,set, update } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoLbzCMkfVx3ZVK-oAEyiPPM8LZFdJiSM",
   authDomain: "legaldoco.firebaseapp.com",
+  databaseURL: "https://legaldoco-default-rtdb.firebaseio.com",
   projectId: "legaldoco",
   storageBucket: "legaldoco.appspot.com",
   messagingSenderId: "872048860776",
@@ -16,6 +18,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getDatabase();
 
 
 
@@ -42,10 +45,27 @@ const Body = () => {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  const handleClick = (event) => {
+  const handleClick = async (event) => {
     if (previewUrl) {
-      console.log(tempSelectedFile)
-      navigate('/summary', { state: { fileData: tempSelectedFile } });
+      // Display the preview URL
+      console.log(tempSelectedFile);
+  
+      // Set a flag in Firebase Realtime Database to indicate verification
+      const dbRef = dbre(db,'flago')
+      
+      try {
+        await update(dbRef, {flag:1}); // Set the flag to 1 (verified)
+  
+        // Navigate to the summary page
+        navigate('/summary', { state: { fileData: tempSelectedFile } });
+      } catch (error) {
+        console.error('Error setting flag in the database:', error);
+        setNotificationMessage('Error verifying document.');
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 3000);
+      }
     } else {
       setNotificationMessage('Please choose a file to upload.');
       setShowNotification(true);
@@ -53,8 +73,8 @@ const Body = () => {
         setShowNotification(false);
       }, 3000);
     }
-
   };
+ 
 
   const handleFileUpload = async () => {
     if (selectedFile) {

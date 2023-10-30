@@ -1,120 +1,66 @@
- 
+Arrangement of Flower pot
 
- 
-EDUCATION 
+Find the ideal placement for a flower pot in a room full of flower pots. Pots are arranged such
+that all ﬂower pots in row i have height less than or equal to ones in row i+1. Flower pots in each
+row are arranged in ascending order of their height.
 
- 
+Locate a suitable position to set the flower pot such that it does not violate the ascending order
+arrangement constraint, keeping in mind the room's Length (L) and width (W). Since the room is
+full, it should be noted that when adding a new flower pot, the one in the last position of the
+room will be removed. Your task is to determine the correct spot for this new placement, with the
+starting coordinate being (0,0) and the ending coordinate being (L-1, W-1).
 
- 
+Note: The higher numbered pot is to be replaced always. Example in an arrangement of 4 6
+sized pots, a pot of size 5 will replace the pot of size 6 and not the pot of size 4.
 
-ENTER NAME HERE 
+Assume, L >= 1, W >= 1
 
-Address: #1, ABC CITY, PUNJAB- 140143 
-E-mail: 1234abcde@gmail.com 
-Phone: +91 9999999999 
-LinkedIn: 
+Input Format:
 
-PROFESSIONAL SUMMARY 
-A  well-organized,  creative  and  goal-
-oriented  graduate  possessing  excellent 
-communication,  problem-solving  and 
-leadership  skills  with  a  flair  to  explore 
-suitable  avenues  in  Computer  Science 
-Engineering  while  developing  advanced 
-projects with efficiency and quality. 
+Each input contains the following:
 
-TECHNICAL COMPETENCIES 
-C++ | JAVA | PYTHON | REDHAT 
+L W - Length & Width of room in number. Constraints - ( L >= 1), ( W >= 1) . Consider L as
+Number of rows in the matrix, W as Number of columns in the matrix.
 
- 
+Next L line contains array A of size W, where each A[i] represents the height of the flower pots.
+(1<=A[i]<=10^9)
 
- 
+H - Height of the flower pot in number. Constraints - (1 <= H <= 10^9)
 
- 
+Output Format:
+I J – Where I is row number, J is column number.
 
- 
+Sample Test Case 1:
 
-INTERPERSONAL SKILLS 
-Team  Leadership  |  Management  & 
-Coordination | Decision Making  
+Input:
+3 5
+1 2 3 4 5
+6 8 9 10 11
+12 13 14 15 16
+7
 
-INTERESTS & HOBBIES 
-Writing | Blogging | Painting | Travelling 
-| Reading | Gardening 
+Output:
+1 1
 
- 
-LANGUAGES KNOWN 
-English | Hindi | Punjabi | French 
+Explanation:
 
- 
+According to the information provided, the flower pots have been organized by size, starting with
+the first pot being size 1 and incrementing in order for each subsequent pot. Our task is now to
+position a flower pot with a size of 7. From the given room setup, we observe that the sixth pot
+(sixth position) is of size 6, so the seventh pot should be placed right next to it. Therefore, the
+resulting configuration is represented as 1 1
 
-PERSONAL DETAILS 
-Mother’s Name: 
-Father’ Name: 
-D.O.B.: 
-Languages Known: 
+Sample Test Case 2:
 
-Bachelors in Computer Science Engineering | Chandigarh University, 
-Gharuan 
-Session: 2019-2023 | Score: 7.5 CGPA 
- 
-Intermediate (CBSE) |XYZ Public School, Delhi 
-Session: 2018-2019 | Percentage: 89% 
- 
-Matriculation (CBSE) | XYZ Public School, Delhi 
-Session: 2016-2017 | Percentage: 92% 
- 
-TRAINING & PROJECTS 
+Input:
 
- 
-COMPANY NAME | POSITION 
-October 2019-Present 
-▪  Designed a program….. 
-▪  Performed an analysis on….. 
+3 3
+1 3 4
+7 8 9
+11 13 15
+14
 
-COMPANY NAME | POSITION 
-October 2019-Present 
-▪  Designed a program….. 
-▪  Performed an analysis on….. 
-
- 
-
- 
-
-COMPANY NAME | POSITION 
-October 2019-Present 
-▪  Designed a program….. 
-▪  Performed an analysis on….. 
- 
-ACADEMIC ACHIEVEMENTS 
-▪  Bronze medal in Maths Olympiad in 2019 by XYZ University 
-▪ 
-▪  Certificate of Merit in Machine Learning, XYZ University 
- 
-CERTIFICATIONS & AWARDS 
-▪  Google Ad Words 
-▪  Digital Marketing Certification from Symbiosis 
-▪  Microsoft Google Ambassador 2018-19, Chandigarh University 
-
-First position in Hackathon 2019 at NIT Jalandhar 
-
-Level A Ethical Hacker 
-
- 
-EXTRA CURRICULAR & CO-CURRICULAR ACHIEVEMENTS 
-▪ 
-▪  Black Belt in Judo 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+Output:
+2 2
 
 
