@@ -45,7 +45,10 @@ const Summary = () => {
         } else {
       onValue(dbRef, (snapshot) => {
         if (snapshot.exists()) {
-          setFileContent(snapshot.val());
+          let tempContent=snapshot.val();
+          tempContent=tempContent.split(" ");
+          console.log(tempContent);
+          setFileContent(tempContent);
           setLoading(false);
         } else {
           console.log('No data available');
@@ -90,10 +93,15 @@ const Summary = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className='summary-container'>
             <h3>***Topic Discussed in Pdf***</h3>
-            <div className='contentStyle'>
-              <pre>{fileContent}</pre>
+            <div >
+              {fileContent.map((content,index)=>{
+                if(index==fileContent.length)
+                  return(content);
+                else
+                  return(content+" ");
+              })}
             </div>
           </div>
         )}
